@@ -6,7 +6,7 @@ namespace ThreeTierArchitecture.BLL.BusinessModels
     {
         public Discount(decimal val)
         {
-            _value = val;
+             _value = val;
         }
         private decimal _value = 0;
         public decimal Value { get { return _value; } }
