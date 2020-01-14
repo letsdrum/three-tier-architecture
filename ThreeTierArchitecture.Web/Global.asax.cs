@@ -1,9 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Ninject;
+using Ninject.Modules;
+using Ninject.Web.Mvc;
 using System.Web.Mvc;
 using System.Web.Routing;
+using ThreeTierArchitecture.BLL.Infrastructure;
+using ThreeTierArchitecture.Web.Util;
 
 namespace ThreeTierArchitecture.Web
 {
@@ -13,6 +14,11 @@ namespace ThreeTierArchitecture.Web
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+            NinjectModule orderModule = new OrderModule();
+            NinjectModule serviceModule = new ServiceModule("DefaultConnection");
+            var kernel = new StandardKernel(orderModule, serviceModule);
+            DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
         }
     }
 }
